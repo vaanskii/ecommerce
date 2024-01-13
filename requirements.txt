@@ -1,0 +1,13 @@
+asgiref @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/asgiref_1699243823778/work
+Django @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/django_1699253156491/work
+django-filter==23.5
+Faker==20.1.0
+Pillow==10.1.0
+psycopg2-binary==2.9.9
+pygame==2.5.2
+python-dateutil==2.8.2
+setuptools==69.0.2
+six==1.16.0
+sqlparse @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/sqlparse_1699250105010/work
+tk==0.1.0
+wheel==0.42.0
