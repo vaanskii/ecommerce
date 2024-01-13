@@ -1,0 +1,163 @@
+.container{
+    display:flex;
+    justify-content: space-between;
+    margin-top:100px;
+}
+
+.detail-img{
+    width:400px;
+    height: 380px;
+}
+
+.image-div{
+    width:410px;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgray;
+    background-color:aliceblue;
+    border-radius: 7px;
+}
+
+.details{
+    width:600px;
+    font-family: 'Raleway', sans-serif;
+    font-family: 'Teko', sans-serif;
+}
+
+.detail-name{
+    color:black;
+    font-size: 60px;
+}
+.detail-seller,
+.detail-description,
+.detail-price{
+    color: black;
+    font-size:25px;
+}
+
+.detail-description strong,
+.detail-seller strong,
+.detail-price strong{
+    color:gray;
+}
+
+/* Add this CSS code to your existing CSS file or create a new one for related items styling */
+
+.related-items-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    margin: 60px auto;
+}
+
+.related-items-container .full-container {
+    width: 100%;
+}
+
+.related-items-container .text-center {
+    color: black;
+    font-size: 50px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
+    font-family: 'Teko', sans-serif;
+    text-align: center;
+    margin-bottom:50px;
+}
+
+.related-items-container .items-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.related-items-container .items-container > div {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    min-width: 250px;
+}
+
+.related-items-container .items-container img {
+    width: 250px;
+    height: 250px;
+    border-radius: 8px 8px 0 0;
+}
+
+.related-items-container .items-container .text-div {
+    padding: 1.5rem;
+}
+
+.related-items-container .text-name {
+    color: gray;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: 'Raleway', sans-serif;
+    font-family: 'Teko', sans-serif;
+}
+
+.related-items-container .text-price {
+    color: gray;
+    text-decoration: none;
+}
+
+.edit-btn{
+    padding-left:15px;
+    padding-right:15px;
+    padding-top:10px;
+    padding-bottom:10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color:black;
+}
+.edit-btn:hover{
+    text-decoration: none; 
+    border: 1px solid black;
+    color:black;
+    font-size:20px;
+}
+.delete-btn{
+    padding-left:15px;
+    padding-right:15px;
+    padding-top:10px;
+    padding-bottom:10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color:black;
+    margin-left:20px;
+}
+
+.delete-btn:hover{
+    text-decoration: none; 
+    border: 1px solid black;
+    color:black;
+    font-size:20px;
+}
+
+.add-to-cart-btn{
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:10px;
+    padding-bottom:10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    color:black;
+    font-size:30px;
+}
+
+.add-to-cart-btn:hover{
+    text-decoration: none; 
+    border: 1px solid black;
+    color:black;
+    font-size:32px;
+}
+
+/* Add additional styling for responsiveness if needed */
+@media (max-width: 768px) {
+    .related-items-container .items-container {
+        flex-wrap: nowrap; /* Prevent items from wrapping on small screens */
+    }
+}

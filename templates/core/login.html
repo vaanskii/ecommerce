@@ -1,0 +1,72 @@
+{% extends "core/base.html" %}
+
+{% block title %}Login | {% endblock title %}
+
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+
+<div class="container">
+    <h1 class="login-h1">Authorization</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="">
+            {{ form.username }}
+        </div>
+
+        <div class="">
+            {{ form.password }}
+            <input type="checkbox" id="showPassword">
+        </div>
+
+
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                {% for field in form %}
+                    {{ field.errors }}
+                {% endfor %}
+
+                {{ from.non_field_errors }}
+            </div>
+        {% endif %}
+
+                    
+        {% if form.errors or form.non_field_errors %}
+            <div class="">
+                {% for field in form %}
+                    {{ field.errors }}
+                {% endfor %}
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <button class="btn draw-border">Submit</button>
+
+        <p class='signup-link'>Do not have an account?<a href="{% url "core:signup" %}">Sign up</a></p>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Function to toggle password visibility
+        function togglePasswordVisibility(inputId, checkboxId) {
+            const passwordInput = document.getElementById(inputId);
+            const showPasswordCheckbox = document.getElementById(checkboxId);
+
+            showPasswordCheckbox.addEventListener('change', function () {
+                if (showPasswordCheckbox.checked) {
+                    passwordInput.type = 'text';
+                } else {
+                    passwordInput.type = 'password';
+                }
+            });
+        }
+
+        // Toggle visibility for the password field
+        togglePasswordVisibility('{{ form.password.id_for_label }}', 'showPassword');
+    });
+</script>
+{% endblock content %} 

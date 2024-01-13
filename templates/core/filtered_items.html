@@ -1,0 +1,7 @@
+<!-- filtered_items.html -->
+<h1>Filtered Items for {{ category.name }}</h1>
+
+{% for item in items %}
+    <!-- Display item information here -->
+    <p>{{ item.name }}, {{ item.price }}</p>
+{% endfor %}

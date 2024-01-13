@@ -1,0 +1,115 @@
+*{
+    margin:0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+    margin-top:30px;
+    padding: 20px;
+}
+
+.login-h1{
+    margin-top:15px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: gray;
+    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
+    font-family: 'Teko', sans-serif;
+}
+
+label{
+    color:gray;
+    padding-left:20px;
+}
+
+
+input[type="text"],
+input[type="password"] {
+    width: 350px;
+    padding: 7px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin:15px;
+}
+
+.draw-border {
+    box-shadow: inset 0 0 0 4px lightgray;
+    color: lightgray;
+    transition: color 0.25s 0.0833333333s;
+    position: relative;
+  }
+  .draw-border::before, .draw-border::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+  }
+  .draw-border::before {
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+  }
+  .draw-border::after {
+    border-top-width: 2px;
+    border-right-width: 2px;
+  }
+  .draw-border:hover {
+    color: black;
+  }
+  .draw-border:hover::before, .draw-border:hover::after {
+    border-color: black;
+    transition: border-color 0s, width 0.25s, height 0.25s;
+    width: 100%;
+    height: 100%;
+  }
+  .draw-border:hover::before {
+    transition-delay: 0s, 0s, 0.25s;
+  }
+  .draw-border:hover::after {
+    transition-delay: 0s, 0.25s, 0s;
+  }
+  
+  .btn {
+    width:300px;
+    margin-left:35px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1.5;
+    font: 700 1.2rem "Josefin Sans", sans-serif;
+    padding: 1em 2em;
+    letter-spacing: 0.05rem;
+    margin-top:15px;
+  }
+  .btn:focus {
+    outline: 2px dotted #55d7dc;
+  }
+
+.signup-link{
+  color:gray;
+  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Outfit', sans-serif;
+  font-family: 'Teko', sans-serif;
+  font-size: 20px;
+  margin-top:30px;
+  margin-left:80px;
+}
+.signup-link a{
+  margin-left:15px;
+  color:#55d7dc;
+  text-decoration: none;
+}
+.signup-link a:hover{
+  color:aqua
+}

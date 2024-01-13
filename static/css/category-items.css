@@ -1,0 +1,57 @@
+.item-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center; /* Center the content */
+    margin-bottom: 200px;
+}
+
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Set 4 items per row */
+    gap: 20px; /* Add gap between items */
+    justify-content: center; /* Center the grid items */
+}
+
+.item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.text-center{
+    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
+    font-family: 'Teko', sans-serif;
+    color:gray;
+    font-size: 50px;
+    margin-top:50px;
+    margin-bottom:70px;
+}
+.text-name {
+    color:gray;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: 'Raleway', sans-serif;
+    font-family: 'Teko', sans-serif;
+}
+.text-price{
+    color:gray;
+    text-decoration: none;
+}
+.search-image{
+    height:50px;
+}
+
+.no-underline{
+    text-decoration: none;
+}
+
+.no-underline:hover{
+    text-decoration: none;
+}

@@ -1,0 +1,63 @@
+{% extends "core/base.html" %}
+
+{% block title %}Update Profile | {% endblock title %}
+
+{% block content %} 
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+
+    <div class="container">
+        <h1 class="update-h1" style="font-family: 'Josefin Sans', sans-serif;font-family: 'Outfit', sans-serif;font-family: 'Teko', sans-serif; color:gray; margin-top:20px;margin-bottom:30px;">Update Your Profile</h1>
+        <form action="{% url 'core:update_profile' %}" method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                {{ profile_form.username }}
+            </div>
+
+            <div class="form-group">
+                {{ profile_form.email }}
+            </div>
+
+            <div class="form-group">
+                {{ password_form.old_password }}
+                <input type="checkbox" id="showPassword" />
+            </div>
+
+            <div class="form-group">
+                {{ password_form.new_password1 }}
+                <input type="checkbox" id="showPassword1" />
+            </div>
+
+            <div class="form-group">
+                {{ password_form.new_password2 }}
+                <input type="checkbox" id="showPassword2" />
+            </div>
+
+            <button class="btn draw-border" type="submit">UPDATE</button>
+        </form>
+    </div>
+
+    <script>
+        // Function to toggle password visibility
+        function togglePasswordVisibility(inputId, checkboxId) {
+            const passwordInput = document.getElementById(inputId);
+            const showPasswordCheckbox = document.getElementById(checkboxId);
+
+            showPasswordCheckbox.addEventListener('change', function () {
+                if (showPasswordCheckbox.checked) {
+                    passwordInput.type = 'text';
+                } else {
+                    passwordInput.type = 'password';
+                }
+            });
+        }
+
+        // Toggle visibility for both password fields
+        togglePasswordVisibility('{{ password_form.old_password.id_for_label }}', 'showPassword');
+        togglePasswordVisibility('{{ password_form.new_password1.id_for_label }}', 'showPassword1');
+        togglePasswordVisibility('{{ password_form.new_password2.id_for_label }}', 'showPassword2');
+    </script>
+
+{% endblock content %}

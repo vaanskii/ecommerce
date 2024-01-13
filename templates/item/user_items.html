@@ -1,0 +1,26 @@
+  {% extends 'core/base.html' %}
+  
+  {% block content %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/search-item.css' %}"> 
+  <h2 style="color:lightgray; text-align:center;margin-top:50px; margin-bottom:70px;">Your Uploaded Items</h2>
+  
+  
+  <div class="item-container">
+      <div class="item-grid">
+          {% for item in user_uploaded_items %}
+          <div class="item">
+              <a class="no-underline" href="{% url 'item:detail' item.id %}">
+                  <img class="search-image" src="{{ item.image.url }}">
+                  <h2 class="text-name">{{ item.name }}</h2>
+                  <p class="text-price">Price: {{ item.price|floatformat:0 }} {{ item.currency }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <p style="color:gray; text-align:center;margin-top:50px; margin-bottom:70px; font-size:50px;">You haven't uploaded any items yet. </p><br>
+        <p style="color:gray; text-align:center;margin-top:50px; margin-bottom:70px;"><a style="color:black; text-align:center;margin-top:50px; margin-bottom:70px;" href="{% url "item:new" %}">Click here</a> to add new items </p>
+    </div>
+    {% endblock %}
+    
+    

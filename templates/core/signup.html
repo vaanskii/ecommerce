@@ -1,0 +1,84 @@
+{% extends "core/base.html" %}
+
+{% block title %}Sign Up | {% endblock title %}
+
+{% block content %} 
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+
+    <div class="container">
+        <h1 class="join-h1">Join Our Community</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <div class="">
+                {{ form.username }}
+            </div>
+
+            <div class="">
+                {{ form.mail }}
+            </div>
+
+            <div class="">
+                {{ form.password1 }}
+                <input type="checkbox" id="showPassword1">
+            </div>
+
+            <div class="">
+                {{ form.password2 }}
+                <input type="checkbox" id="showPassword2">
+            </div>
+
+            <div class="">
+                <label class="gender" for="">Gender</label><br>
+                {{ form.gender }}
+            </div>            
+
+            <div class="">
+                {{ form.email }}
+            </div>
+
+            <div class="">
+                {{ form.mobile_number }}
+            </div>
+
+
+            
+            {% if form.errors or form.non_field_errors %}
+                <div class="">
+                    {% for field in form %}
+                        {{ field.errors }}
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <button class="btn draw-border">SUBMIT</button>
+            <p class="login-link">Already have an account? <a href="{% url "core:login" %}">Login</a></p>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Function to toggle password visibility
+            function togglePasswordVisibility(inputId, checkboxId) {
+                const passwordInput = document.getElementById(inputId);
+                const showPasswordCheckbox = document.getElementById(checkboxId);
+    
+                showPasswordCheckbox.addEventListener('change', function () {
+                    if (showPasswordCheckbox.checked) {
+                        passwordInput.type = 'text';
+                    } else {
+                        passwordInput.type = 'password';
+                    }
+                });
+            }
+    
+            // Toggle visibility for both password fields
+            togglePasswordVisibility('{{ form.password1.id_for_label }}', 'showPassword1');
+            togglePasswordVisibility('{{ form.password2.id_for_label }}', 'showPassword2');
+        });
+    </script>
+</script>
+{% endblock content %} 

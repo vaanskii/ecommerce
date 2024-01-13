@@ -1,0 +1,77 @@
+{% extends "core/base.html" %}
+
+{% block title %} {{ item.name }} Detail | {% endblock title %}
+
+
+{% block content %}
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'css/details.css' %}"> 
+
+    <div class="container">
+        <div class="image-div">
+            <img class="detail-img" src="{{ item.image.url }}">
+        </div>
+
+
+        <div class="details">
+            <h1 class="detail-name" >{{ item.name }}</h1> <hr>
+            <p class="detail-price"><strong>Price: </strong>{{ item.price|floatformat:0 }} {{ item.currency }}</p>
+            <p class="detail-seller"><strong>Seller: </strong>{{ item.created_by }}</p>
+            
+            {% if item.description %}
+                <p class="detail-description"> <strong>Description: </strong>  <br> {{ item.description }} </p>
+            {% endif %}
+            
+        
+            {% if request.user == item.created_by %}
+                <div>
+                    <p>This is your item! You can delete or edit it.</p>
+                    <a class="edit-btn" href="{% url "item:edit" item.id %}">Edit</a>
+                    <a class="delete-btn"href="{% url "item:delete" item.id %}">Delete</a>
+                </div>
+            {% else %}
+
+
+            {% if request.user != item.created_by %}
+                <a class="add-to-cart-btn" href="{% url 'cart:add_to_cart' item.id %}">Add to cart</a>
+            {% endif %}
+        
+            {% endif %}
+        </div>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+    <hr style="margin-top: 100px;">
+
+    {% if related_items %}
+    <div class="related-items-container">
+        <div class="full-container">
+            <h2 class="text-center">Similar products</h2>
+    
+            <div class="items-container">
+                {% for item in related_items %}
+                    <div>
+                        <a href="{% url 'item:detail' item.id %}">
+                            <img src="{{ item.image.url }}" class="image">
+                            <div class="text-div">
+                                <h2 class="text-name">{{ item.name }}</h2>
+                                <p class="text-price">Price: {{ item.price|floatformat:0 }}$</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+    
+
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+{% block title %}{{ category.name }} | {% endblock title %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/category-items.css' %}"> 
+<h1 class="text-center">Items in {{ category.name }} category</h1>
+
+{% if items %}
+    <div class="item-container">
+        <div class="item-grid">
+            {% for item in items %}
+                <div class="item">
+                    <a class="no-underline" href="{% url 'item:detail' item.id %}">
+                        <img class="search-image" src="{{ item.image.url }}">
+                        <h2 class="text-name">{{ item.name }}</h2>
+                        <p class="text-price">Price: {{ item.price|floatformat:0 }} {{ item.currency }}</p>
+                    </a>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+{% else %}
+<h3 class="text-center">There is not items in this category</h3>
+{% endif %}
+{% endblock content %}

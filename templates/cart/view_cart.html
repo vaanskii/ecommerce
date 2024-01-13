@@ -1,0 +1,106 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/item-cart.css' %}"> 
+
+<h1 class="cart-header" style="margin-top:50px;">Your Cart</h1>
+<div class="container">
+
+    {% if cart.cartitem_set.all %}
+        <ul class="item-ul">
+            {% for cart_item in cart.cartitem_set.all %}
+                <li class="item-li">
+                    <div class="center-items">
+                        <img class="cart-image" src="{{ cart_item.item.image.url }}" alt="{{ cart_item.item.name }}">
+                        <p style="margin-left:10px;">{{ cart_item.item.name }}</p>
+                        <p style="margin-left:15px;">{{ cart_item.item.price|floatformat:0 }} {{ cart_item.item.currency }}</p> 
+                    </div>
+                    <div>
+                        <div class="quantity-container">
+                            <form class="button-div" method="POST" action="{% url 'cart:update_cart' cart_item.item.id %}">
+                                {% csrf_token %}
+                                <button type="button" class="quantity-btn minus" onclick="updateCartQuantity('{{ cart_item.item.id }}', -1)">-</button>
+                                <input type="number" id="quantity{{ cart_item.item.id }}" name="quantity" value="{{ cart_item.quantity }}" min="1" class="no-arrows" oninput="saveCartQuantity('{{ cart_item.item.id }}', this.value)">
+                                <button type="button" class="quantity-btn plus-btn" onclick="updateCartQuantity('{{ cart_item.item.id }}', 1)">+</button>
+                            </form>
+                            <form method="POST" action="{% url 'cart:delete_from_cart' cart_item.item.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+
+    {% if cart.cartitem_set.all %}
+        <div class="full-price">
+            <p>Total Price: {{ total_price|floatformat:2 }} <small>{{ cart.cartitem_set.first.item.currency }}</small></p>
+            <a href="#"><button class="btn draw-border">PURCHASE</button></a>
+        </div>
+    {% endif %}
+</div>
+
+
+
+<script>
+    function updateCartQuantity(itemId, amount) {
+        var inputElement = document.getElementById('quantity' + itemId);
+        var currentValue = parseInt(inputElement.value);
+        var newValue = Math.max(1, currentValue + amount);
+
+        // Update the quantity input value
+        inputElement.value = newValue;
+
+        // Save the updated quantity to localStorage
+        saveCartQuantity(itemId, newValue);
+
+        // Recalculate and update the total price
+        recalculateTotalPrice();
+    }
+
+    function saveCartQuantity(itemId, value) {
+        localStorage.setItem('quantity' + itemId, value);
+    }
+
+    function recalculateTotalPrice() {
+        var total = 0;
+
+        // Iterate through each item in the cart and calculate the total price
+        {% for cart_item in cart.cartitem_set.all %}
+            var quantity = parseInt(document.getElementById('quantity{{ cart_item.item.id }}').value);
+            var price = parseFloat('{{ cart_item.item.price }}');
+            var totalPrice = quantity * price;
+
+            // Convert the price to GEL if the currency is USD
+            if ('{{ cart_item.item.currency }}' === 'USD') {
+                totalPrice *= exchangeRate;
+            }
+
+            total += totalPrice;
+        {% endfor %}
+
+        // Display the recalculated total price
+        document.querySelector('.full-price p').innerText = 'Total Price: ' + total.toFixed(2) + ' GEL';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Retrieve and set saved values
+        {% for cart_item in cart.cartitem_set.all %}
+            var quantityValue = localStorage.getItem('quantity{{ cart_item.item.id }}');
+            if (quantityValue !== null) {
+                document.getElementById('quantity{{ cart_item.item.id }}').value = quantityValue;
+            }
+        {% endfor %}
+
+        // Initial total price calculation
+        recalculateTotalPrice();
+    });
+</script>
+
+
+{% endblock content %}
